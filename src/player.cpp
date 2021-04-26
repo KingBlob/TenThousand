@@ -15,6 +15,7 @@ void Player::roll(int turn){
             dice[i].second = turn;
         }
     }
+    sort(dice);
 }
 
 void Player::hold(int pos){
@@ -94,6 +95,56 @@ int Player::calcScore(){
             s+= threeEq(nums);
             s+=oneOrFive(nums);
         }
+    }
+    return s;
+}
+
+int Player::calcRollScore(int turn){
+    int s = 0;
+    std::vector<int> nums;
+    for(int j = 0; j<6; j++){
+        if(dice[j].second == turn)
+            nums.push_back(dice[j].first.getVal());
+    }
+    sort(nums);
+    /*
+        6 dice conditions
+        all =
+        1 2 3 4 5 6
+        2 = x3
+
+        5 dice conditions
+        5/6 =
+        1 2 3 4 5 || 2 3 4 5 6
+
+        4 dice conditions
+        4/6 =
+
+        3 dice conditions
+        3/6 =
+
+        2 dice conditions
+        1 || 5 x2
+
+        1 die conditions
+        1 || 5
+
+        */
+    if(nums.size() > 2){
+        s += allEq(nums);
+        s += straight(nums);
+        s += threePairs(nums);
+
+        s += fiveEq(nums);
+        s += fiveStraight(nums);
+
+        s += fourEq(nums);
+
+        s += threeEq(nums);
+    }
+    while(nums.size() > 0){
+        s+= threeEq(nums);
+        s+=oneOrFive(nums);
     }
     return s;
 }
@@ -245,6 +296,38 @@ void Player::sort(std::vector<int> &v){
                 int temp = v.at(j);
                 v.at(j) = v.at(i);
                 v.at(i) = temp;
+            }
+        }
+    }
+}
+
+void Player::sort(std::pair<Dice, int>* arr){
+    for(int i = 0; i<6; i++){
+        for(int j = i+1; j<6; j++){
+            //both held?
+            if(arr[i].first.isHeld() && arr[j].first.isHeld()){
+                //i > j
+                if(arr[i].first.getVal() > arr[j].first.getVal()){
+                    std::pair<Dice, int> temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+            //j held i !held
+            if(!arr[i].first.isHeld() && arr[j].first.isHeld()){
+                //swap vals
+                std::pair<Dice, int> temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+            //i & j both !held
+            if(!arr[i].first.isHeld() && !arr[j].first.isHeld()){
+                //i > j
+                if(arr[i].first.getVal() > arr[j].first.getVal()){
+                    std::pair<Dice, int> temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
             }
         }
     }

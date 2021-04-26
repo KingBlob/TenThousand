@@ -12,6 +12,10 @@ int Dice::getVal(){
     return val;
 }
 
+void Dice::setVal(int v){
+    val = v;
+}
+
 void Dice::hold(){
     held = !held;
 }
@@ -21,6 +25,9 @@ bool Dice::isHeld(){
 }
 
 std::ostream & operator<<(std::ostream & out, const Dice & d){
-    out << "| "<<d.val<<" |";
+    if(d.held)
+        out << "|- "<<d.val<<" -|";
+    else
+        out << "| "<<d.val<<" |";
     return out;
 }

@@ -16,9 +16,11 @@ class Player{
         int getScore();
         void setScore();
         void printAll();
+        int calcRollScore(int turn);
     private:
         void resetDice();
         int calcScore();
+        
         /* SCORING CONDITIONS */
         int allEq(std::vector<int> &);
         int straight(std::vector<int> &);
@@ -30,6 +32,7 @@ class Player{
         int oneOrFive(std::vector<int> &);
         /* Sorting Algorithm */
         void sort(std::vector<int> &);
+        void sort(std::pair<Dice, int>*);
         void rm(int, std::vector<int> &);
         int rmDupe(std::vector<int> &);
 };

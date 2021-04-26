@@ -12,6 +12,7 @@ class Dice{
         Dice();
         void roll();
         int getVal();
+        void setVal(int);
         void hold();
         bool isHeld();
         friend std::ostream &operator<<(std::ostream &, const Dice &);
