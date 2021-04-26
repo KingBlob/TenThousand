@@ -13,14 +13,14 @@ class Player{
         void roll(int turn);
         void hold(int pos);
         bool itsHeld(int pos);
+        bool allHeld();
         int getScore();
-        void setScore();
+        void setScore(int);
         void printAll();
         int calcRollScore(int turn);
-    private:
         void resetDice();
         int calcScore();
-        
+    private:
         /* SCORING CONDITIONS */
         int allEq(std::vector<int> &);
         int straight(std::vector<int> &);

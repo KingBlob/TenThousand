@@ -26,12 +26,16 @@ bool Player::itsHeld(int pos){
     return dice[pos].first.isHeld();
 }
 
+bool Player::allHeld(){
+    return itsHeld(0)&&itsHeld(1)&&itsHeld(2)&&itsHeld(3)&&itsHeld(4)&&itsHeld(5);
+}
+
 int Player::getScore(){
     return score;
 }
 
-void Player::setScore(){
-    score += calcScore();
+void Player::setScore(int p){
+    score += p;
 }
 
 void Player::printAll(){
@@ -42,8 +46,12 @@ void Player::printAll(){
 }
 
 void Player::resetDice(){
-    for(int i = 0; i<6; i++)
+    for(int i = 0; i<6; i++){
         dice[i].second = 0;
+        if(dice[i].first.isHeld()){
+            dice[i].first.hold();
+        }
+    }
 }
 
 int Player::calcScore(){
@@ -226,6 +234,7 @@ int Player::fiveStraight(std::vector<int> &v){
             if(dupe != -1){
                 v.push_back(dupe);
             }
+            std::cout<<"Ez"<<std::endl;
             return 500;
         }
     }
