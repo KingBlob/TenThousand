@@ -31,5 +31,6 @@ class Player{
         /* Sorting Algorithm */
         void sort(std::vector<int> &);
         void rm(int, std::vector<int> &);
+        int rmDupe(std::vector<int> &);
 };
 #endif

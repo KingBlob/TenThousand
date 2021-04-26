@@ -54,9 +54,7 @@ int Player::calcScore(){
             if(dice[j].second == i)
                 nums.push_back(dice[j].first.getVal());
         }
-        std::cout<<"1"<<std::endl;
         sort(nums);
-        std::cout<<"2"<<std::endl;
         /*
             6 dice conditions
             all =
@@ -81,33 +79,21 @@ int Player::calcScore(){
 
             */
         if(nums.size() > 2){
-            std::cout<<"a"<<std::endl;
             s += allEq(nums);
-            std::cout<<"b"<<std::endl;
             s += straight(nums);
-            std::cout<<"c"<<std::endl;
             s += threePairs(nums);
-            std::cout<<"d"<<std::endl;
 
             s += fiveEq(nums);
-            std::cout<<"e"<<std::endl;
-            // s += fiveStraight(nums);
-            // std::cout<<"f"<<std::endl;
+            s += fiveStraight(nums);
 
             s += fourEq(nums);
-            std::cout<<"f"<<std::endl;
 
             s += threeEq(nums);
-            std::cout<<"3"<<std::endl;
         }
         while(nums.size() > 0){
-            std::cout<<"4"<<std::endl;
             s+= threeEq(nums);
-            std::cout<<"5"<<std::endl;
             s+=oneOrFive(nums);
-            std::cout<<"6"<<std::endl;
         }
-        std::cout<<"CurScore: "<<s<<std::endl;
     }
     return s;
 }
@@ -178,27 +164,27 @@ int Player::fiveEq(std::vector<int> &v){
     }
     return 0;
 }
-// int Player::fiveStraight(std::vector<int> &v){
-//     if(v.size()<5){
-//         return 0;
-//     }
-//     if(v.at(1)==2&&
-//     v.at(2)==3&&
-//     v.at(3)==4&&
-//     v.at(4)==5&&
-//     (v.at(0)==1 ||v.at(5)==6)){
-//         if(v.at(5)==6){
-//             for(int j = 0; j<5; j++)
-//                 v.pop_back();
-//         }
-//         else{
-//             for(int j = 0; j<5; j++)
-//                 rm(0,v);
-//         }
-//         return 500;
-//     }
-//     else return 0;
-// }
+int Player::fiveStraight(std::vector<int> &v){
+    if(v.size()<5){
+        return 0;
+    }
+    int dupe = rmDupe(v);
+    if(v.size()==5){
+        if(v.at(0)== v.at(1)-1&&v.at(2)==v.at(3)-1&&v.at(4)-1==v.at(3)){
+            v.clear();
+            if(dupe != -1){
+                v.push_back(dupe);
+            }
+            return 500;
+        }
+    }
+    if(dupe != -1){
+        v.push_back(dupe);
+        sort(v);
+    }
+    return 0;
+
+}
 int Player::fourEq(std::vector<int> &v){
     if(v.size()<4){
         return 0;
@@ -238,12 +224,10 @@ int Player::threeEq(std::vector<int> &v){
 int Player::oneOrFive(std::vector<int> &v){
     // while(v.size()>0){
         if(v.at(0)==1){
-            std::cout<<"v.at(0): "<<v.at(0)<<std::endl;
             rm(0, v);
             return 100;
         }
         else if(v.at(0)==5){
-            std::cout<<"v.at(0): "<<v.at(0)<<std::endl;
             rm(0, v);
             return 50;
         }
@@ -277,4 +261,15 @@ void Player::rm(int index, std::vector<int> &v){
         v.at(index) = temp;
         v.pop_back();
     }
+}
+int Player::rmDupe(std::vector<int> &v){
+    for(int i = 0; i<v.size()-2; i++){
+        if(v.at(i)==v.at(i+1)){
+            int o = v.at(i);
+            rm(i, v);
+            sort(v);
+            return o;
+        }
+    }
+    return -1;
 }
