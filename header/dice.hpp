@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <time.h>
+#include <iostream>
 class Dice{
     private:
         int val;
@@ -13,5 +14,7 @@ class Dice{
         int getVal();
         void hold();
         bool isHeld();
+        friend std::ostream &operator<<(std::ostream &, const Dice &);
+
 };
 #endif /* DICE_HPP */

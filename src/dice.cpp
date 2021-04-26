@@ -1,9 +1,10 @@
 #include "dice.hpp"
 
-Dice::Dice() :held(0) { roll();}
+Dice::Dice() : held(0) {
+    val = rand() %6 +1;
+}
 
 void Dice::roll(){
-    srand(time(0));
     val = rand()%6 +1;
 }
 
@@ -17,4 +18,9 @@ void Dice::hold(){
 
 bool Dice::isHeld(){
     return held;
+}
+
+std::ostream & operator<<(std::ostream & out, const Dice & d){
+    out << "| "<<d.val<<" |";
+    return out;
 }

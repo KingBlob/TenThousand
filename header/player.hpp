@@ -12,8 +12,10 @@ class Player{
         Player();
         void roll(int turn);
         void hold(int pos);
+        bool itsHeld(int pos);
         int getScore();
         void setScore();
+        void printAll();
     private:
         void resetDice();
         int calcScore();
