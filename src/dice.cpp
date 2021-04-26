@@ -1,6 +1,6 @@
 #include "dice.hpp"
 
-Dice::Dice() { roll();}
+Dice::Dice() :held(0) { roll();}
 
 void Dice::roll(){
     srand(time(0));
@@ -9,4 +9,8 @@ void Dice::roll(){
 
 int Dice::getVal(){
     return val;
+}
+
+void Dice::hold(){
+    held = !held;
 }

@@ -6,9 +6,11 @@
 class Dice{
     private:
         int val;
+        bool held;
     public:
         Dice();
         void roll();
         int getVal();
+        void hold();
 };
 #endif /* DICE_HPP */
