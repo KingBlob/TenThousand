@@ -12,5 +12,6 @@ class Dice{
         void roll();
         int getVal();
         void hold();
+        bool isHeld();
 };
 #endif /* DICE_HPP */

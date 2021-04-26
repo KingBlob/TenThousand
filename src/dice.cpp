@@ -14,3 +14,7 @@ int Dice::getVal(){
 void Dice::hold(){
     held = !held;
 }
+
+bool Dice::isHeld(){
+    return held;
+}
