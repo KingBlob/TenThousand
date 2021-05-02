@@ -234,7 +234,7 @@ int Player::threePairs(std::vector<int> &v){
     if(v.size()<6){
         return 0;
     }
-    if(v.at(0) == v.at(1) && v.at(2)==v.at(3)&&v.at(4)==v.at(5)){
+    if(v.at(0) == v.at(1) && v.at(2)==v.at(3)&&v.at(4)==v.at(5)&&v.at(0)!=v.at(2)&&v.at(0)!=v.at(4)){
         while(v.size()>0)
             v.pop_back();
         return 1000;
