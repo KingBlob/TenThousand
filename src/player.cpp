@@ -251,6 +251,7 @@ int Player::fiveEq(std::vector<int> &v){
             if(v.at(0)==v.at(4)){
                 for(int j = 0; j<5; j++){
                     rm(0, v);
+                    sort(v);
                 }
             }
             else{
@@ -276,7 +277,6 @@ int Player::fiveStraight(std::vector<int> &v){
             if(dupe != -1){
                 v.push_back(dupe);
             }
-            std::cout<<"Ez"<<std::endl;
             return 500;
         }
     }
@@ -294,7 +294,7 @@ int Player::fourEq(std::vector<int> &v){
     for(int i = 0; i<v.size()-3; i++){
         if(v.at(i)== v.at(i+3)){
             int t = v.at(i);
-            for(int j = 0; j<3; j++){
+            for(int j = 0; j<4; j++){
                 rm(i,v);
                 sort(v);
             }
