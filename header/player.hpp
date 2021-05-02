@@ -15,6 +15,7 @@ class Player{
         bool itsHeld(int pos);
         bool allHeld();
         int getScore();
+        void addScore(int);
         void setScore(int);
         void printAll();
         int calcRollScore(int turn);
@@ -35,5 +36,8 @@ class Player{
         void sort(std::pair<Dice, int>*);
         void rm(int, std::vector<int> &);
         int rmDupe(std::vector<int> &);
+    public:
+        void setTurn(int pos, int t){dice[pos].second = t;}
+        void setDieVal(int pos, int v){dice[pos].first.setVal(v);}
 };
 #endif

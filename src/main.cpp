@@ -4,54 +4,78 @@
 
 using namespace std;
 
-string menu();
-void roll(int &, int &, Player &);
-void hold(Player &);
+// string menu();
+// void roll(int &, int &, Player &);
+// void hold(Player &);
 
 int main(){
-    string game = menu();
-    if(game == "1"){
-        Player one;
-        int turn = 0;
-        int tScore = 0;
-        cout<<"Single player. Begin!"<<endl;
-        while(one.getScore()<10000){
-            if(one.allHeld()){
-                tScore += one.calcScore();
-                cout<<"All six dice used! Roll again!"<<endl;
-                cout<<"Current turn's score: "<<tScore<<endl;
-                turn = 0;
-            }
-            else{
-                if(turn ==0)
-                    roll(turn, tScore, one);
-                else{
-                    string answ = "";
-                    cout<<"r - Roll\nh- Hold\ne - End turn"<<endl;
-                    cin>>answ;
-                    if(answ == "r"){
-                        if(turn == 3){
-                            cout<<"No rolls left, end turn."<<endl;
-                        }
-                        else
-                            roll(turn, tScore, one);
-                    }
-                    else if(answ == "h"){
-                        hold(one);
-                    }
-                    else{
-                        tScore += one.calcScore();
-                        one.setScore(tScore);
-                        turn =0;
-                        one.resetDice();
-                        cout<<"Turn ended. Your score: "<<one.getScore()<<endl;
-                    }
-                }
-                
-            }
+    Player test;
+    test.roll(0);
+    cout<<"Begin Tests:"<<endl;
+    cout<<"Testing threeEq"<<endl;
+    test.setTurn(0,1);
+    test.setDieVal(0,4);
+    test.setTurn(1,1);
+    test.setDieVal(1,1);
+    test.setTurn(2,1);
+    test.setDieVal(2,1);
+    test.setTurn(3,1);
+    test.setDieVal(3,1);
+    test.setTurn(4,1);
+    test.setDieVal(4,1);
+    test.setTurn(5,1);
+    test.setDieVal(5,5);
+    test.printAll();
+    test.addScore(test.calcScore());
+    cout<<"Score = "<<test.getScore()<<"  Expected 1050"<<endl;
+    return 0;
 
-        }
-    }
+
+    // string game = menu();
+    // if(game == "1"){
+    //     Player one;
+    //     int turn = 0;
+    //     int tScore = 0;
+    //     cout<<"Single player. Begin!"<<endl;
+    //     while(one.getScore()<10000){
+    //         if(one.allHeld()){
+    //             tScore += one.calcScore();
+    //             cout<<"All six dice used! Roll again!"<<endl;
+    //             cout<<"Current turn's score: "<<tScore<<endl;
+    //             turn = 0;
+    //             tScore = 0;
+    //             one.resetDice();
+    //         }
+    //         else{
+    //             if(turn ==0)
+    //                 roll(turn, tScore, one);
+    //             else{
+    //                 string answ = "";
+    //                 cout<<"r - Roll\nh- Hold\ne - End turn"<<endl;
+    //                 cin>>answ;
+    //                 if(answ == "r"){
+    //                     if(turn == 3){
+    //                         cout<<"No rolls left, end turn."<<endl;
+    //                     }
+    //                     else
+    //                         roll(turn, tScore, one);
+    //                 }
+    //                 else if(answ == "h"){
+    //                     hold(one);
+    //                 }
+    //                 else{
+    //                     tScore += one.calcScore();
+    //                     one.setScore(tScore);
+    //                     turn =0;
+    //                     one.resetDice();
+    //                     cout<<"Turn ended. Your score: "<<one.getScore()<<endl;
+    //                 }
+    //             }
+                
+    //         }
+
+    //     }
+    //}
 
 
     // cout<<"Ready to play? Commands are: r- roll dice, h- hold die, q- quit game."<<endl;
@@ -88,51 +112,50 @@ int main(){
     //         }
     //     }
     // }
-    return 0;
 }
 
-string menu(){
-    string ans = "";
-    cout<<"Main menu:\nsolo - new solo game\nversus - play against other players\ncomp - play against computer\nquit - exit game"<<endl;
-    cin >>ans;
-    if(ans == "solo"){
-        return "1";
-    }
-    else if(ans == "versus"){
-        //TODO
-        return "q";
-    }
-    else if(ans == "comp"){
-        //TODO
-        return "q";
-    }
-    else return "q";
-}
-void roll(int &turn, int &tScore, Player &p){
-    cout<<"Rolling..."<<endl;
-    turn ++;
-    p.roll(turn);
-    p.printAll();
-    if(p.calcRollScore(turn)==0){
-        cout<<"Dead roll! Reset points."<<endl;
-        turn = 0;
-        tScore = 0;
-        p.resetDice();
-        return;
-    }
-    else{
-        cout<<"Max roll score is "<<p.calcRollScore(turn)<<endl;
-    }
-}
-void hold(Player &p){
-    while(1){
-        int holds = 0;
-        p.printAll();
-        cout<<"Enter dice numbers to hold (0 to finish)"<<endl;
-        cin >>holds;
-        if(holds==0)
-            break;
-        p.hold(holds-1);
-        cout<<"Die "<<holds<<" held toggled."<<endl;
-    }
-}
+// string menu(){
+//     string ans = "";
+//     cout<<"Main menu:\nsolo - new solo game\nversus - play against other players\ncomp - play against computer\nquit - exit game"<<endl;
+//     cin >>ans;
+//     if(ans == "solo"){
+//         return "1";
+//     }
+//     else if(ans == "versus"){
+//         //TODO
+//         return "q";
+//     }
+//     else if(ans == "comp"){
+//         //TODO
+//         return "q";
+//     }
+//     else return "q";
+// }
+// void roll(int &turn, int &tScore, Player &p){
+//     cout<<"Rolling..."<<endl;
+//     turn ++;
+//     p.roll(turn);
+//     p.printAll();
+//     if(p.calcRollScore(turn)==0){
+//         cout<<"Dead roll! Reset points."<<endl;
+//         turn = 0;
+//         tScore = 0;
+//         p.resetDice();
+//         return;
+//     }
+//     else{
+//         cout<<"Max roll score is "<<p.calcRollScore(turn)<<endl;
+//     }
+// }
+// void hold(Player &p){
+//     while(1){
+//         int holds = 0;
+//         p.printAll();
+//         cout<<"Enter dice numbers to hold (0 to finish)"<<endl;
+//         cin >>holds;
+//         if(holds==0)
+//             break;
+//         p.hold(holds-1);
+//         cout<<"Die "<<holds<<" held toggled."<<endl;
+//     }
+// }
