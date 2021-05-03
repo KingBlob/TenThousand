@@ -106,7 +106,6 @@ int Player::calcScore(){
         }
         while(nums.size() > 0){
             s+= threeEq(nums);
-
             s+=oneOrFive(nums);
         }
     }
@@ -290,7 +289,7 @@ int Player::threeEq(std::vector<int> &v){
     return 0;
 }
 int Player::oneOrFive(std::vector<int> &v){
-    // while(v.size()>0){
+    while(v.size()>0){
         if(v.at(0)==1){
             rm(0, v);
             return 100;
@@ -300,7 +299,7 @@ int Player::oneOrFive(std::vector<int> &v){
             return 50;
         }
         else rm(0, v);
-    // }
+    }
     return 0;
 }
 
