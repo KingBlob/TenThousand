@@ -94,58 +94,22 @@ int Player::calcScore(){
             */
         if(nums.size() > 2){
             s += allEq(nums);
-            for(int i = 0; i<nums.size(); i++){
-                std::cout<<nums.at(i)<<" ";
-            }
-            std::cout<<"Score after Eq "<<s<<std::endl;
             s += straight(nums);
-            for(int i = 0; i<nums.size(); i++){
-                std::cout<<nums.at(i)<<" ";
-            }
-            std::cout<<"Score after str8 "<<s<<std::endl;
             s += threePairs(nums);
-            for(int i = 0; i<nums.size(); i++){
-                std::cout<<nums.at(i)<<" ";
-            }
-            std::cout<<"Score after 3pr "<<s<<std::endl;
 
             s += fiveEq(nums);
-            for(int i = 0; i<nums.size(); i++){
-                std::cout<<nums.at(i)<<" ";
-            }
-            std::cout<<"Score after 5Eq "<<s<<std::endl;
             s += fiveStraight(nums);
-            for(int i = 0; i<nums.size(); i++){
-                std::cout<<nums.at(i)<<" ";
-            }
-            std::cout<<"Score after 5str "<<s<<std::endl;
 
             s += fourEq(nums);
-            for(int i = 0; i<nums.size(); i++){
-                std::cout<<nums.at(i)<<" ";
-            }
-            std::cout<<"Score after 4Eq "<<s<<std::endl;
 
             s += threeEq(nums);
-            for(int i = 0; i<nums.size(); i++){
-                std::cout<<nums.at(i)<<" ";
-            }
-            std::cout<<"Score after 3Eqa "<<s<<std::endl;
         }
         while(nums.size() > 0){
             s+= threeEq(nums);
-            for(int i = 0; i<nums.size(); i++){
-                std::cout<<nums.at(i)<<" ";
-            }
-            std::cout<<"Score after 3Eqb "<<s<<std::endl;
+
             s+=oneOrFive(nums);
-            for(int i = 0; i<nums.size(); i++){
-                std::cout<<nums.at(i)<<" ";
-            }
-            std::cout<<"Score after 1or5 "<<s<<std::endl;
         }
     }
-    std::cout<<"Score before return "<<s<<std::endl;
     return s;
 }
 
@@ -190,7 +154,7 @@ int Player::calcRollScore(int turn){
 
         s += fourEq(nums);
 
-        s += threeEq(nums);
+        // s += threeEq(nums);
     }
     while(nums.size() > 0){
         s+= threeEq(nums);
@@ -272,7 +236,7 @@ int Player::fiveStraight(std::vector<int> &v){
     }
     int dupe = rmDupe(v);
     if(v.size()==5){
-        if(v.at(0)== v.at(1)-1&&v.at(1)==v.at(2)-1&&v.at(2)==v.at(3)-1&&v.at(3)==v.at(4)-1&&v.at(4)==v.at(5)-1){
+        if(v.at(0)== v.at(1)-1&&v.at(1)==v.at(2)-1&&v.at(2)==v.at(3)-1&&v.at(3)==v.at(4)-1){
             v.clear();
             if(dupe != -1){
                 v.push_back(dupe);
@@ -397,15 +361,11 @@ void Player::rm(int index, std::vector<int> &v){
             v.at(v.size()-1) = v.at(index);
             v.at(index) = temp;
         }
-        for(int i = 0; i<v.size(); i++){
-                std::cout<<v.at(i)<<" ";
-            }
-        std::cout<<"Rm "<<v.at(v.size()-1)<<std::endl;
         v.pop_back();
     }
 }
 int Player::rmDupe(std::vector<int> &v){
-    for(int i = 0; i<v.size()-2; i++){
+    for(int i = 0; i<v.size()-1; i++){
         if(v.at(i)==v.at(i+1)){
             int o = v.at(i);
             rm(i, v);
